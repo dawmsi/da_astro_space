@@ -1,0 +1,54 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<script is:inline>
+  function setDarkMode(document) {
+    const storedTheme = localStorage.getItem('theme');
+    document.documentElement.className +=
+      storedTheme ?? 'dark';
+  }
+
+  function setAnimated(document) {
+    const storedAnimation = JSON.parse(
+      localStorage.getItem('animated')
+    );
+
+    if (!storedAnimation) {
+      document.documentElement.classList.remove('animated');
+    } else {
+      document.documentElement.classList.add('animated');
+    }
+  }
+
+  setDarkMode(document);
+  setAnimated(document);
+
+  document.addEventListener('astro:before-swap', (ev) => {
+    setDarkMode(ev.newDocument);
+    setAnimated(ev.newDocument);
+  });
+</script>
+
+<html lang="en">
+  <head>
+    <BaseHead {title} {description} />
+  </head>
+  <body
+    class="bg-bgMain dark:bg-bgDark text-colorTextMain dark:text-colorTextDark">
+    <div
+      class="absolute overflow-hidden top-0 bottom-0 w-full">
+      <!-- <Backgroud /> -->
+    </div>
+    <div class="relative h-full">
+      <slot />
+    </div>
+  </body>
+</html>

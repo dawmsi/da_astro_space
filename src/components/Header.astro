@@ -1,0 +1,99 @@
+---
+import { URLS } from '../consts/navigation';
+import { NAVS } from '../consts/navigation';
+import { SearchInput, SearchBtn } from './search';
+import SwitchTheme from './switchers/SwitchMode.svelte';
+import SwitchAnimation from './switchers/SwitchAnimation.svelte';
+import Container from './containers/Container.astro';
+import { CONTACTS } from '../consts';
+const url = Astro.url;
+---
+
+<Container
+  class="sticky h-fit top-0 z-50 px-0 sm:px-3 xxl:max-w-screen-xl will-change-auto bg-[#f7f7f780] dark:bg-[#16161680] backdrop-blur-md">
+  <header
+    class="p-5 pt-2 pb-1 xl:pb-2 flex items-center justify-between">
+    <label
+      for="drawer-nav"
+      class="bg-transparent font-semibold grid xl:hidden swap swap-rotate cursor-pointer">
+      <span class="hidden">drawerToggle</span>
+      <svg
+        class="[&>path]:stroke-colorTextMain dark:[&>path]:stroke-colorTextDark"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="white"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke-width="1.6320000000000001">
+        <path
+          d="M5 8H13.75M5 12H19M10.25 16L19 16"
+          stroke="#464455"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+        </path>
+      </svg>
+    </label>
+    <a
+      href={URLS.home}
+      class="xl:hidden block w-fit md:flex md:justify-center">
+      <div class="flex flex-col not-italic">
+        <span class="font-bold leading-6">
+          {CONTACTS.site}
+        </span>
+      </div>
+    </a>
+    <div class="hidden xl:flex items-center px-0">
+      <div class="relative lg:mx-2">
+        <SearchInput
+          client:visible
+          class={`hidden xl:inline-block pl-5 pr-9 py-[10.5px]
+              rounded-[24px] w-full max-w-xs`}
+        />
+      </div>
+    </div>
+    <nav class="hidden xl:flex xl:flex-1 xl:justify-around">
+      <ul
+        class="list-none flex items-center justify-between gap-2 xl:gap-5">
+        {
+          NAVS.map((link) => {
+            return (
+              <li>
+                <a
+                  href={link?.url}
+                  class={`inline-flex uppercase not-italic font-normal text-3xl leading-[38px] hover:text-secondary ${
+                    link?.url === url.pathname
+                      ? 'text-secondary dark:text-secondary underline'
+                      : 'no-underline'
+                  }`}>
+                  {link?.title}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+    <div class="hidden xl:flex xl:items-center mr-5">
+      <SwitchTheme client:load id="headerThemeSwitcher" />
+    </div>
+    <div class="hidden xl:block min-w-7">
+      <SwitchAnimation client:load />
+    </div>
+    <SearchBtn client:load />
+  </header>
+  <div class="collapse relative px-3">
+    <input
+      hidden
+      checked={false}
+      id="toggleCollapse"
+      type="checkbox"
+    />
+    <div class="collapse-content xl:hidden pt-3 px-3">
+      <SearchInput
+        id="adaptiveSearchInput"
+        client:visible
+        class={`h-10 rounded-full w-full px-4 py-3`}
+      />
+    </div>
+  </div>
+</Container>

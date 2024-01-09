@@ -1,0 +1,21 @@
+---
+// import Aside from '../components/Aside.astro';
+import Drawer from "../components/Drawer.astro";
+import Header from "../components/Header.astro";
+import Container from "../components/containers/Container.astro";
+---
+
+<Drawer>
+  <div class="relative flex flex-col min-h-full">
+    <Header />
+    <Container class={"flex flex-1 flex-nowrap gap-3 xl:justify-between px-5"}>
+      <!-- <Aside /> -->
+      <main class="flex flex-1 flex-col grow w-full h-fit p-3 sm:mx-3 lg:mx-14 xl:mx-0 justify-center">
+          <slot />
+      </main>
+    </Container>
+    <footer class="text-center py-3 backdrop-blur-md">
+      Created  by DA_OFF 2024
+    </footer>
+  </div>
+</Drawer>

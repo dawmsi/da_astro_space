@@ -1,0 +1,15 @@
+{
+  "trailingComma": "es5",
+  "printWidth": 60,
+  "bracketSameLine": true,
+  "jsxBracketSameLine": true,
+  "singleAttributePerLine": false,
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "plugins": [
+    "prettier-plugin-astro"
+  ]
+}

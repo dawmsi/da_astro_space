@@ -1,0 +1,23 @@
+---
+const {
+  class: className,
+  svgD = '',
+  size,
+  color,
+  fill = '',
+  width = '24',
+  height = '24',
+} = Astro.props;
+---
+
+<svg
+  width={size || width}
+  height={size || height}
+  viewBox={`0 0 24 24`}
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class={` ${className ?? ''} fill-colorTextMain dark:fill-colorTextDark`}
+>
+  <path fill={color || fill} d={svgD}>
+  </path>
+</svg>
