@@ -1,8 +1,14 @@
 ---
+import Stagger from '../components/Stagger.svelte';
 import HtmlLayout from '../layouts/HtmlLayout.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 ---
 
 <HtmlLayout title="Home Page" description="Page with news">
-  <PageLayout>Home</PageLayout>
+  <PageLayout>
+    <div
+      class="absolute overflow-hidden top-0 bottom-0 right-0 left-0">
+      <Stagger client:only />
+    </div>
+  </PageLayout>
 </HtmlLayout>
