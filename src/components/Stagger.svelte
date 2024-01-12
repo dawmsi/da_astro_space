@@ -34,7 +34,6 @@
         id: index,
         onClick: () => {
           lastClickedIndex = index;
-          createTiles();
         },
       })
     );
@@ -85,7 +84,7 @@
             duration: 500,
           },
         ],
-        delay: anime.stagger(30, {
+        delay: anime.stagger(120, {
           grid: [columns, rows],
           from: lastClickedIndex,
         }),
@@ -107,12 +106,13 @@
     <button
       data-index={tile.id}
       class="tile text-xs"
-      on:click={tile.onClick}
-      style="color: {currentColor}">
+      on:click={tile.onClick}>
+      {`${'🤬'}`}
       <div
-        class="bg-[#533566] rounded-sm {lastClickedIndex ===
-          tile.id && 'bg-orange-300'}">
-        {`${'🤬 #%!'}`}
+        class="bg-[#533566] rounded-sm py-2 {lastClickedIndex ===
+          tile.id && 'bg-orange-300'}"
+        style="color: {currentColor}">
+        {`${'#%!'}`}
       </div>
     </button>
   {/each}
